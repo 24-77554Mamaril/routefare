@@ -3,164 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RouteFare - Plan Your Route, Know Your Fare</title>
+    <title>Welcome to RouteFare - Plan Your Journey</title>
     <link rel="icon" type="image/svg+xml" href="assets/icons/RouteFare_logo.svg">
-
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="style.css">
+    <style>
+        .hero {
+            height: 100vh;
+            width: 100%;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/images/BG.png') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .cta-btn {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .cta-btn:hover {
+            background: #0056b3;
+        }
+    </style>
 </head>
 <body>
-
-    <header>
-        <div class="container" style="display: flex; align-items: center; gap: 20px;">
-            <a href="landing.html" class="back-btn" style="text-decoration: none; color: white; background: #007bff; padding: 8px 16px; border-radius: 4px; font-weight: bold; font-size: 0.9rem;">← Back to Home</a>
-            <div style="display: flex; align-items: center; gap: 15px;">
-                <img src="assets/icons/RouteFare_logo.svg" alt="RouteFare Logo" style="height: 50px; width: 50px; border-radius: 50%; object-fit: cover; border: 2px solid white;">
-                <div>
-                    <h1 style="margin: 0; line-height: 1;">ROUTEFARE</h1>
-                    <p class="tagline" style="margin: 0;">Plan Your Route. Know Your Fare.</p>
-                </div>
-            </div>
+    <section class="hero">
+        <div class="hero-content">
+            <img src="assets/icons/RouteFare_logo.svg" alt="RouteFare Logo" style="height: 200px; width: 200px; border-radius: 50%; object-fit: cover; margin-bottom: 30px; border: 5px solid white;">
+            <h1 style="font-size: 5rem; margin-bottom: 1rem;">ROUTEFARE</h1>
+            <p style="font-size: 2rem; margin-bottom: 3rem;">Plan Your Route. Know Your Fare.</p>
+            <a href="ROUTEFARE.html" class="cta-btn" style="padding: 1.5rem 3rem; font-size: 1.8rem;">Start Planning Now</a>
         </div>
-    </header>
-
-    <main class="container">
-        <section class="calculator-grid">
-            <!-- Input Panel -->
-            <div class="input-panel">
-                <div class="input-group">
-                    <label for="departure-input">FROM</label>
-                    <div class="search-container">
-                        <input type="text" id="departure-input" placeholder="Search airport (code, name, city)..." autocomplete="off">
-                        <div id="departure-results" class="autocomplete-results"></div>
-                    </div>
-                </div>
-
-                <div class="input-group">
-                    <label for="destination-input">TO</label>
-                    <div class="search-container">
-                        <input type="text" id="destination-input" placeholder="Search airport (code, name, city)..." autocomplete="off">
-                        <div id="destination-results" class="autocomplete-results"></div>
-                    </div>
-                </div>
-
-                <div class="input-group">
-                    <label>CURRENCY</label>
-                    <select id="currency-select">
-                        <option value="PHP">₱ (PHP)</option>
-                        <option value="USD">$ (USD)</option>
-                        <option value="EUR">€ (EUR)</option>
-                    </select>
-                </div>
-
-                <button id="calculate-btn" class="primary-btn">CALCULATE ROUTEFARE</button>
-            </div>
-
-            <!-- Map and Results Panel -->
-            <div class="display-panel">
-                <div id="map"></div>
-
-                <div id="results-section" class="hidden">
-                    <div class="results-tabs">
-                        <button class="tab-btn active" data-tab="drive-tab">🚗 Driving Cost</button>
-                        <button class="tab-btn" data-tab="flight-tab">✈️ Flight Info</button>
-                    </div>
-
-                    <div id="drive-tab" class="tab-content active">
-                        <div class="results-grid">
-                            <div class="summary-card">
-                                <h3>TRAVEL SUMMARY</h3>
-                                <p><strong>From:</strong> <span id="res-from">-</span></p>
-                                <p><strong>To:</strong> <span id="res-to">-</span></p>
-                                <p><strong>Distance:</strong> <span id="res-distance">-</span></p>
-                                <p><strong>Travel Time:</strong> <span id="res-time">-</span></p>
-                            </div>
-                            <div class="cost-card">
-                                <h3>COST BREAKDOWN</h3>
-                                <div class="cost-item"><span>Fuel:</span> <span id="res-fuel">-</span></div>
-                                <div class="cost-item"><span>Toll:</span> <span id="res-toll">-</span></div>
-                                <div class="cost-item"><span>Parking:</span> <span id="res-parking">-</span></div>
-                                <hr>
-                                <div class="cost-item total"><span>ESTIMATED TOTAL:</span> <span id="res-total">-</span></div>
-                                <div class="cost-item per-person"><span>Cost per Passenger:</span> <span id="res-per-person">-</span></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="flight-tab" class="tab-content hidden">
-                        <div class="flight-info-card">
-                            <h3>ESTIMATED FLIGHT COSTS (MNL $\rightarrow$ CEB)</h3>
-                            <div class="flight-grid">
-                                <div class="flight-item">
-                                    <strong>Budget/Economy (One-Way)</strong>
-                                    <p>₱1,700 – ₱4,500 ($30 - $80)</p>
-                                </div>
-                                <div class="flight-item">
-                                    <strong>Budget/Economy (Round-Trip)</strong>
-                                    <p>₱3,600 – ₱6,500 ($64 - $115)</p>
-                                </div>
-                                <div class="flight-item">
-                                    <strong>Business Class (Round-Trip)</strong>
-                                    <p>₱21,000+ ($378+)</p>
-                                </div>
-                            </div>
-
-                            <div class="flight-tiers">
-                                <h4>Available Ticket Types</h4>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Airline</th>
-                                            <th>Fare Tiers</th>
-                                            <th>What's Included</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Cebu Pacific</td>
-                                            <td>Lite $\rightarrow$ Standard $\rightarrow$ Flexi</td>
-                                            <td>Lite: Carry-on only; Standard: Baggage; Flexi: Flexibility.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>AirAsia</td>
-                                            <td>Standard $\rightarrow$ Value Pack</td>
-                                            <td>Standard: Basic; Value Pack: Baggage, meals, and seats.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Phil. Airlines</td>
-                                            <td>Economy Saver $\rightarrow$ Business</td>
-                                            <td>Economy: Basic baggage; Business: Lounge and priority.</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div class="flight-insights">
-                                <p><strong>💡 Insight:</strong> February is the cheapest month to fly. Booking 9 weeks in advance can save up to 45%.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p class="disclaimer">
-                <strong>Estimated Cost:</strong> RouteFare provides estimated transportation costs based on the information supplied by the user and available routing data. Actual costs may vary due to fuel prices, toll rates, traffic conditions, parking fees, route changes, and other circumstances.
-            </p>
-        </div>
-    </footer>
-
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <!-- App Modules -->
-    <script src="js/airports.js"></script>
-    <script src="js/calculator.js"></script>
-    <script src="js/map.js"></script>
-    <script src="js/app.js"></script>
+    </section>
 </body>
 </html>
