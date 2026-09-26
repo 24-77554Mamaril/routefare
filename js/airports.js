@@ -26,7 +26,7 @@ const AIRPORT_DATA = [
     { code: "PVG", name: "Shanghai Pudong International Airport", city: "Shanghai", country: "China", lat: 31.1443, lng: 121.8083 },
     { code: "PEK", name: "Beijing Capital International Airport", city: "Beijing", country: "China", lat: 40.0799, lng: 116.6149 },
     { code: "BOM", name: "Chhatrapati Shivaji Maharaj International Airport", city: "Mumbai", country: "India", lat: 19.0896, lng: 72.8656 },
-    { code: "DEL", name:, "Indira Gandhi International Airport", city: "Delhi", country: "India", lat: 28.5562, lng: 77.1000 },
+    { code: "DEL", name: "Indira Gandhi International Airport", city: "Delhi", country: "India", lat: 28.5562, lng: 77.1000 },
     { code: "CGK", name: "Soekarno-Hatta International Airport", city: "Jakarta", country: "Indonesia", lat: -6.1256, lng: 106.6559 },
 
     // --- MIDDLE EAST ---

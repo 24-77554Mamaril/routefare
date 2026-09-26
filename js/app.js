@@ -53,6 +53,7 @@ const App = {
 
         if (query.length < 2) {
             resultsDiv.innerHTML = '';
+            resultsDiv.style.display = 'none';
             return;
         }
 
@@ -66,6 +67,7 @@ const App = {
             );
 
             this.renderSearchResults(airports, type);
+            resultsDiv.style.display = airports.length > 0 ? 'block' : 'none';
         } catch (err) {
             console.error("Search error:", err);
         }
@@ -74,8 +76,9 @@ const App = {
     fetchAirports: async function(query) {
         // This is now a legacy function used by handleCalculate smart-selection
         return AIRPORT_DATA.filter(airport =>
-            airport.name.toLowerCase().includes(query.toLowerCase()) ||
-            airport.code.toLowerCase().includes(query.toLowerCase())
+            (airport.name && airport.name.toLowerCase().includes(query.toLowerCase())) ||
+            (airport.code && airport.code.toLowerCase().includes(query.toLowerCase())) ||
+            (airport.city && airport.city.toLowerCase().includes(query.toLowerCase()))
         );
     },
 
@@ -111,7 +114,9 @@ const App = {
             document.getElementById('destination-input').value = `${airport.name} (${airport.iata || airport.icao})`;
         }
 
-        document.getElementById(`${type}-results`).innerHTML = '';
+        const resultsDiv = document.getElementById(`${type}-results`);
+        resultsDiv.innerHTML = '';
+        resultsDiv.style.display = 'none';
         MapManager.updateMarkers(this.departure, this.destination);
     },
 

@@ -101,6 +101,7 @@ main {
     overflow-y: auto;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     border-radius: 0 0 4px 4px;
+    display: none;
 }
 
 .autocomplete-item {
@@ -401,13 +402,20 @@ footer {
 
 /* Mobile Responsive */
 @media (max-width: 850px) {
-
-
-
     .calculator-grid {
         grid-template-columns: 1fr;
     }
     .display-panel {
         align-items: center;
     }
+}
+
+.plane-marker {
+    background: none;
+    border: none;
+}
+.plane-icon {
+    font-size: 20px;
+    transition: all 0.02s linear;
+    filter: drop-shadow(0 0 2px white);
 }
