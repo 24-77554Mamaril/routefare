@@ -1,0 +1,413 @@
+:root {
+    --primary-color: #2c3e50;
+    --accent-color: #3498db;
+    --bg-color: #f4f7f6;
+    --text-color: #333;
+    --white: #ffffff;
+    --border-color: #ddd;
+    --error-color: #e74c3c;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 2rem 0;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+}
+
+.tagline {
+    font-style: italic;
+    opacity: 0.9;
+}
+
+main {
+    padding: 2rem 0;
+}
+
+.calculator-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+/* Input Panel */
+.input-panel {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.input-group input, .input-group select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.search-container {
+    position: relative;
+}
+
+.autocomplete-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-top: none;
+    z-index: 2000;
+    max-height: 250px;
+    overflow-y: auto;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 4px 4px;
+}
+
+.autocomplete-item {
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+}
+
+.autocomplete-item:last-child {
+    border-bottom: none;
+}
+
+.autocomplete-item:hover {
+    background-color: #f8f9fa;
+    color: var(--accent-color);
+}
+
+.vehicle-info {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 2px solid var(--bg-color);
+}
+
+.vehicle-info h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.grid-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.grid-inputs .input-group {
+    margin-bottom: 0.5rem;
+}
+
+.primary-btn {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--accent-color);
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 1.5rem;
+}
+
+.primary-btn:hover {
+    background-color: #2980b9;
+}
+
+/* Display Panel */
+.display-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+#map {
+    height: 500px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 1;
+}
+
+.hidden {
+    display: none;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.summary-card, .cost-card {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.summary-card h3, .cost-card h3 {
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--bg-color);
+    padding-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.summary-card p {
+    margin-bottom: 0.5rem;
+}
+
+.cost-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.cost-item.total {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+.cost-item.per-person {
+    font-style: italic;
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+footer {
+    background-color: #ddd;
+    padding: 2rem 0;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.disclaimer {
+    font-size: 0.8rem;
+    color: #666;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Custom Airport Icons */
+.custom-airport-icon {
+    background: none;
+    border: none;
+}
+
+.icon-inner {
+    background: var(--primary-color);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3), 0 0 0 3px var(--white);
+    border: 2px solid var(--accent-color);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7); }
+    70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(52, 152, 219, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(52, 152, 219, 0); }
+}
+
+.transport-wrapper {
+    display: flex;
+    gap: 10px;
+}
+
+.transport-wrapper select {
+    flex: 2;
+}
+
+#currency-select {
+    flex: 1;
+}
+
+.preset-container {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.preset-btn {
+    flex: 1;
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    border: 1px solid var(--accent-color);
+    background: var(--white);
+    color: var(--accent-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.preset-btn:hover {
+    background: var(--accent-color);
+    color: var(--white);
+}
+
+.preset-btn.active {
+    background: var(--accent-color);
+    color: var(--white);
+    font-weight: bold;
+}
+
+.results-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.tab-btn {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    background: #ddd;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+    background: var(--accent-color);
+    color: var(--white);
+}
+
+.tab-content {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.flight-info-card {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.flight-info-card h3 {
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--bg-color);
+    padding-bottom: 0.5rem;
+}
+
+.flight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.flight-item {
+    background: var(--bg-color);
+    padding: 1rem;
+    border-radius: 6px;
+    text-align: center;
+    border-left: 4px solid var(--accent-color);
+}
+
+.flight-item strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.flight-tiers h4 {
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.flight-tiers table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+.flight-tiers th, .flight-tiers td {
+    text-align: left;
+    padding: 0.8rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.flight-tiers th {
+    background: var(--bg-color);
+    font-size: 0.85rem;
+}
+
+.flight-insights {
+    background: #e1f5fe;
+    padding: 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    border-left: 4px solid var(--accent-color);
+}
+
+/* Mobile Responsive */
+@media (max-width: 850px) {
+
+
+
+    .calculator-grid {
+        grid-template-columns: 1fr;
+    }
+    .display-panel {
+        align-items: center;
+    }
+}
